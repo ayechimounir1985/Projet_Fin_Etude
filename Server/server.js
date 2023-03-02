@@ -5,6 +5,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const UserRouter = require('./Routes/UserRouter')
 
+app.use(express.json())
 app.use('/api/users',UserRouter )
 
 mongoose.set('strictQuery', true)
