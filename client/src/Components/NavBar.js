@@ -6,11 +6,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { LogOut } from '../Redux/UserSlice';
 
 
 const NavBar = () => {
+    const dispatch = useDispatch(
+
+    )
     const isAuth = useSelector(state=> state.User.isAuth)
   return (
     <div>
@@ -29,7 +33,9 @@ const NavBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          {isAuth? <Button color="inherit">LogOut</Button> : 
+          {isAuth? <Button onClick={()=>{dispatch(LogOut())
+          window.location.reload(true)
+         }} color="inherit">LogOut</Button> : 
           <>
           <Button as={Link} to='/' color="inherit">Register</Button>
           <Button as={Link} to='/Login' color="inherit">Login</Button>

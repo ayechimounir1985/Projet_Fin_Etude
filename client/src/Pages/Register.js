@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { SignUp } from '../Redux/UserSlice';
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -34,6 +35,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 const Register = () => {
+  const navigate = useNavigate()
   const [newUser, setNewUser] = useState({})
   const HAndlechange = (e)=>{
     setNewUser({...newUser, [e.target.name] : e.target.value})
@@ -42,6 +44,7 @@ const Register = () => {
   const signinUp = (e)=>{
    e.preventDefault()
    dispatch(SignUp(newUser))
+   navigate('/Login')
 
   }
   return (
@@ -109,6 +112,7 @@ const Register = () => {
               </Grid>
             </Grid>
             <Button
+              onClick={signinUp}
               type="submit"
               fullWidth
               variant="contained"

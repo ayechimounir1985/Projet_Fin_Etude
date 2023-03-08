@@ -5,7 +5,7 @@ const { AuthMiddlewares } = require('../Middleware/AuthMiddleware')
 const { DataValidation } = require('../Middleware/DataValidation')
 
 router.post('/',DataValidation,UserContoller.Register )
-router.post('/login',DataValidation,UserContoller.login )
+router.post('/Login',DataValidation,UserContoller.login )
 router.get('/',AuthMiddlewares,UserContoller.getAllDataUsers )
 
 
