@@ -12,7 +12,11 @@ const Register = async(req,res)=>{
             return res.status(402).json({errors: errors.mapped() })
         }
         //verifier que l'utilisateur n'a pas de compte exixtant
-        const {name,email,password} = req.body;
+        const {name,email,password,Role} = req.body;
+       /*  const isAdmin = await User.findOne({Role:'admin'})
+        if(!isAdmin){
+            await User.create({email:'admin@gmail.com', password:'123456', Role:'admin'})
+        } */
         const found =await  User.findOne({email})
         if(found){
             return res.status(401).json({message:'your email exixt!'})
@@ -21,7 +25,7 @@ const Register = async(req,res)=>{
         const salt = bcrypt.genSaltSync(10);//synchrone
         const hashedPassword = await bcrypt.hash(password, salt);//asynchrone
         //2 save user in DB
-        const newUser = await User.create({name,email,password:hashedPassword})
+        const newUser = await User.create({name,email,password:hashedPassword,Role})
         res.status(200).json(newUser)
     } catch (error) {
         res.status(500).json({message: error})

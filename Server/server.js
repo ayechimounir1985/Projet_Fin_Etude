@@ -4,9 +4,11 @@ const app = express()
 require('dotenv').config()
 const mongoose = require('mongoose')
 const UserRouter = require('./Routes/UserRouter')
+const RapportRouter = require('./Routes/RapportRoutes')
 
 app.use(express.json())
 app.use('/api/users',UserRouter )
+app.use('/api/rapport', RapportRouter)
 
 mongoose.set('strictQuery', true)
 ConnectDB()

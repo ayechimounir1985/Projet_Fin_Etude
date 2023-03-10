@@ -1,6 +1,6 @@
+const mongoose = require('mongoose')
 
-
-const RapportSchema = new mongoose.schema({
+const RapportSchema = new mongoose.Schema({
     Frame:{
     type:String,
     required:true,
@@ -35,6 +35,8 @@ const RapportSchema = new mongoose.schema({
     RemainstobeDone:{
         type:String,
         required:true,
-    }
+    },
+  
 
 })
+module.exports = mongoose.model ('rapport',RapportSchema)
