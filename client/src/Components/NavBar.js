@@ -7,11 +7,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogOut } from '../Redux/UserSlice';
 
 
 const NavBar = () => {
+  const navigate = useNavigate()
     const dispatch = useDispatch(
 
     )
@@ -30,12 +31,19 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+          
+          {isAuth? <>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button as={Link} to='/Add Rapport' color="inherit">Add Rapport</Button>
           </Typography>
-          {isAuth? <Button onClick={()=>{dispatch(LogOut())
-          window.location.reload(true)
-         }} color="inherit">LogOut</Button> : 
+          <Typography variant="h6" component="div" sx={{ flexGrow: 25 }}>
+          <Button as={Link} to='/Rapport' color="inherit">Rapport Lists</Button>
+          </Typography>
+          <Button onClick={()=>{dispatch(LogOut())
+          navigate('/Login')
+         }} color="inherit">LogOut</Button> 
+          </>
+          : 
           <>
           <Button as={Link} to='/' color="inherit">Register</Button>
           <Button as={Link} to='/Login' color="inherit">Login</Button>

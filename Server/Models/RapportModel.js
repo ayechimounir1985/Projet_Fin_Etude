@@ -36,6 +36,10 @@ const RapportSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    status:{
+        type:String,
+        default:'non-validated'
+    }
   
 
 })
