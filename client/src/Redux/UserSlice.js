@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios'
 
+
 export const SignUp = createAsyncThunk('user/SignUp' , async(newUser,{rejectWithValue})=>{
     try {
         const {data} = await axios.post('/api/users/',newUser)
@@ -68,5 +69,6 @@ const UserSlice = createSlice({
 
     }
 })
+
 export default UserSlice.reducer
 export const {LogOut} = UserSlice.actions
