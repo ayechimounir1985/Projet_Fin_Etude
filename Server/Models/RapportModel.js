@@ -14,12 +14,7 @@ const RapportSchema = new mongoose.Schema({
         required:true,
     },
     Adress: String,
-    FPM:{
-        type:[{DPiece:String,
-               Quantity: Number
-        
-        }]
-    },
+    FPM:String,
     DateandHourDepart:{
          type:String,
          required:true,
