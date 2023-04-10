@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AddRapport } from "../Redux/RapportSlice";
-import { Card } from "react-bootstrap";
+
+import { Button, Card } from "react-bootstrap";
+import { GetAllRapport } from "../Redux/RapportSlice";
 
 const RapportLists = () => {
   const dispatch = useDispatch();
-  const userrapports = useSelector((state) => state.User.userrapports);
+  const RappLists = useSelector((state) => state.userrapport.usersrapport);
 
   useEffect(() => {
-    dispatch(AddRapport());
+    dispatch(GetAllRapport());
   }, []);
   return (
     <div>
-      {userrapports?.map((el) => (
+      {RappLists?.map((el) => (
         <div>
           <Card style={{ width: "18rem" }}>
             <Card.Body>
@@ -23,6 +24,8 @@ const RapportLists = () => {
               <Card.Text>
                {el.Adress}
               </Card.Text>
+              <Button variant="success">Update</Button>
+              <Button variant="danger">Delete</Button>
             </Card.Body>
           </Card>
         </div>

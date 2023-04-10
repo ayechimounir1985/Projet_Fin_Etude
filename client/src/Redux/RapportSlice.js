@@ -2,10 +2,25 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios'
 
 export const AddRapport = createAsyncThunk("userrapport/AddRapport",async (newrapport,{ rejectWithValue }) => {
-    const { dataa } = await axios.post('/api/rapport/',newrapport);
+    try {
+      const { dataa } = await axios.post('/api/rapport/',newrapport)
     return dataa;
+    } catch (error) {
+      rejectWithValue(error.response.message.dataa)
+    }
   }
 );
+
+//get all rapports
+
+export const GetAllRapport = createAsyncThunk('userrapport,GetAllRapport',async(_,{rejectWithValue})=>{
+  try {
+    const { dataa } = await axios.post('/api/rapport/')
+  return dataa
+  } catch (error) {
+    rejectWithValue(error.response.message.dataa)
+  }
+})
 
 const RapportSlice = createSlice({
     name: "userrapport",
@@ -28,7 +43,18 @@ const RapportSlice = createSlice({
       },
       [AddRapport.rejected] : (state,{type,payload})=>{
           state.Errors = payload
-      }
+      },
+      [GetAllRapport.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [GetAllRapport.fulfilled] : (state,{type,payload})=>{
+      state.isLoading = false    
+      state.usersrapport = payload
+      },
+      [GetAllRapport.rejected] : (state,{type,payload})=>{
+          state.Errors = payload
+      },
+      
     }
   })
   export default RapportSlice.reducer
