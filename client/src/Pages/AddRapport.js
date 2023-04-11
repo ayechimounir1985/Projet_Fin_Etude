@@ -3,8 +3,10 @@ import {Button ,Form} from "react-bootstrap";
 import {useDispatch} from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AddRapport } from "../Redux/RapportSlice";
+import {useNavigate} from "react-router-dom"
 
 const AddRapports = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [newrapport, setnewRapport] = useState({})
   const HandleChange = (e)=>{
@@ -14,7 +16,7 @@ const AddRapports = () => {
   const Adding = (e)=>{
   e.preventDefault();
   dispatch(AddRapport(newrapport))
-
+  navigate('/Rapport')
   }
   return (
     <div>

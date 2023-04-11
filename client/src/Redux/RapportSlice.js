@@ -1,19 +1,30 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios'
 
+
 export const AddRapport = createAsyncThunk("userrapport/AddRapport",async (newrapport,{ rejectWithValue }) => {
     try {
       const { dataa } = await axios.post('/api/rapport/',newrapport)
-    return dataa;
+    return dataa
     } catch (error) {
       rejectWithValue(error.response.message.dataa)
     }
-  }
-);
+  })
+
+// Update Rapport
+
+export const UpdateRapport = createAsyncThunk('userrapport/UpdateRapport',async(updateRapport,{rejectWithValue})=>{
+try {
+  const { dataa } = await axios.post(`/api/rapport/${updateRapport._id}`,updateRapport)
+  return dataa
+} catch (error) {
+  rejectWithValue(error.response.message.dataa)
+}
+})
 
 //get all rapports
 
-export const GetAllRapport = createAsyncThunk('userrapport,GetAllRapport',async(_,{rejectWithValue})=>{
+export const GetAllRapport = createAsyncThunk('userrapport/GetAllRapport',async(_,{rejectWithValue})=>{
   try {
     const { dataa } = await axios.post('/api/rapport/')
   return dataa
@@ -45,7 +56,7 @@ const RapportSlice = createSlice({
           state.Errors = payload
       },
       [GetAllRapport.pending]: (state) => {
-        state.isLoading = true;
+        state.isLoading = true
       },
       [GetAllRapport.fulfilled] : (state,{type,payload})=>{
       state.isLoading = false    
@@ -54,7 +65,12 @@ const RapportSlice = createSlice({
       [GetAllRapport.rejected] : (state,{type,payload})=>{
           state.Errors = payload
       },
-      
+      [UpdateRapport.pending] : (state)=>{
+        state.isLoading = true
+      },
+      [UpdateRapport.fulfilled] : (state,{type,payload})=>{
+        state.usersrapport = state.usersrapport.map(el => (el._id == payload._id)? {...el,...payload} : el)
+      }
     }
   })
   export default RapportSlice.reducer
