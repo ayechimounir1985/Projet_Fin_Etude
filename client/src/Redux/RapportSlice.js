@@ -15,21 +15,21 @@ export const AddRapport = createAsyncThunk("userrapport/AddRapport",async (newra
 
 export const UpdateRapport = createAsyncThunk('userrapport/UpdateRapport',async(updateRapport,{rejectWithValue})=>{
 try {
-  const { dataa } = await axios.post(`/api/rapport/${updateRapport._id}`,updateRapport)
-  return dataa
+  const { data } = await axios.put(`/api/rapport/${updateRapport._id}`,updateRapport)
+  return data
 } catch (error) {
-  rejectWithValue(error.response.message.dataa)
+  return rejectWithValue(error.response.message.dataa)
 }
 })
 
 //get all rapports
 
-export const GetAllRapport = createAsyncThunk('userrapport/GetAllRapport',async(_,{rejectWithValue})=>{
+export const GetAllRapport = createAsyncThunk('userrapport/GetAllRapport',async( _ ,{rejectWithValue})=>{
   try {
-    const { dataa } = await axios.post('/api/rapport/')
-  return dataa
+    const { data } = await axios.get('/api/rapport/')
+  return data
   } catch (error) {
-    rejectWithValue(error.response.message.dataa)
+    return  rejectWithValue(error.response.message.data)
   }
 })
 
@@ -50,7 +50,7 @@ const RapportSlice = createSlice({
       },
       [AddRapport.fulfilled] : (state,action)=>{
       state.isLoading = false    
-      state.rapport = action.payload
+      state.userrapport = action.payload
       },
       [AddRapport.rejected] : (state,{type,payload})=>{
           state.Errors = payload
@@ -69,7 +69,10 @@ const RapportSlice = createSlice({
         state.isLoading = true
       },
       [UpdateRapport.fulfilled] : (state,{type,payload})=>{
-        state.usersrapport = state.usersrapport.map(el => (el._id == payload._id)? {...el,...payload} : el)
+        state.usersrapport = state.usersrapport.map(el => (el._id === payload._id)? {...el,...payload} : el)
+      },
+      [UpdateRapport.rejected] : (state,{type,payload})=>{
+        state.Errors = payload
       }
     }
   })

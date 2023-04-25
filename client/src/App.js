@@ -16,7 +16,7 @@ function App() {
         <Route path='/Add Rapport' element={<AddRapport/>} />
         <Route path='/Login' element={<Login/>} />
         <Route path='/Profile' element={<PrivateRoute>  <Profile/></PrivateRoute>} />
-        <Route path='/Rapport' element={<RapportLists/>} />
+        <Route path='/RapportLists' element={<RapportLists/>} />
 
       </Routes>
     </Router>

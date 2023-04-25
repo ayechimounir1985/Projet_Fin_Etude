@@ -37,7 +37,7 @@ const NavBar = () => {
             <Button as={Link} to='/Add Rapport' color="inherit">Add Rapport</Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 25 }}>
-          <Button as={Link} to='/Rapport' color="inherit">Rapport Lists</Button>
+          <Button as={Link} to='/RapportLists' color="inherit">Rapport Lists</Button>
           </Typography>
           <Button onClick={()=>{dispatch(LogOut())
           navigate('/Login')
