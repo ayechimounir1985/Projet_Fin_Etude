@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button, Card } from "react-bootstrap";
-import { GetAllRapport } from "../Redux/RapportSlice";
+import { DeleteRapport, GetAllRapport } from "../Redux/RapportSlice";
 import UpdateRapportmodal from "../Components/UpdateRapportmodal";
 
 const RapportLists = () => {
@@ -26,7 +26,7 @@ const RapportLists = () => {
                {el?.Adress}
               </Card.Text>
               <UpdateRapportmodal el={el}/>
-              <Button variant="danger">Delete</Button>
+              <Button onClick={()=> dispatch(DeleteRapport(el._id))} variant="danger">Delete</Button>
             </Card.Body>
           </Card>
         </div>

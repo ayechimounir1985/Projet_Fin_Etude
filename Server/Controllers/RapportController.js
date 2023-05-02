@@ -26,7 +26,7 @@ const GetAllDataRapport = async (req, res) => {
 const deletedDataRapport = async (req, res) => {
   try {
     const deletedRapport = await rapport.findByIdAndDelete(req.params.id);
-    res.json({ msg: "User has been deleted successfully !!", deletedRapport });
+    res.json({deletedRapport, msg: "User has been deleted successfully !!", deletedRapport });
   } catch (error) {
     console.log(error);
   }

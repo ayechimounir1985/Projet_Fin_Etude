@@ -22,6 +22,17 @@ try {
 }
 })
 
+//Delete Rapport
+
+export const DeleteRapport = createAsyncThunk('userrapport/DeleteRapport',async(id,{rejectWithValue})=>{
+  try {
+    const {data} = await axios.delete(`/api/rapport/${id}`)
+    return data
+  } catch (error) {
+  return rejectWithValue(error.response.message.dataa)
+  }
+})
+
 //get all rapports
 
 export const GetAllRapport = createAsyncThunk('userrapport/GetAllRapport',async( _ ,{rejectWithValue})=>{
@@ -69,9 +80,20 @@ const RapportSlice = createSlice({
         state.isLoading = true
       },
       [UpdateRapport.fulfilled] : (state,{type,payload})=>{
+        state.isLoading = false
         state.usersrapport = state.usersrapport.map(el => (el._id === payload._id)? {...el,...payload} : el)
       },
       [UpdateRapport.rejected] : (state,{type,payload})=>{
+        state.Errors = payload
+      },
+      [DeleteRapport.pending] : (state)=>{
+        state.isLoading = true
+      },
+      [DeleteRapport.fulfilled] : (state,{type,payload})=>{
+        state.isLoading = false
+        state.usersrapport = state.usersrapport.filter(el=> el._id !== payload.deletedRapport._id)
+      },
+      [DeleteRapport.rejected] : (state,{type,payload})=>{
         state.Errors = payload
       }
     }
