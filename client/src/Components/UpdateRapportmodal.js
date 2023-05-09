@@ -3,7 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import { useDispatch } from 'react-redux';
 import {UpdateRapport} from '../Redux/RapportSlice'
 const UpdateRapportmodal = ({el}) => {
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
